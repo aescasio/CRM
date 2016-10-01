@@ -1,0 +1,11 @@
+<div class="box-body">
+    <!--  Form fields -->
+    <div class="form-group">
+        $FIELDS$
+    </div>
+</div>
+<!-- /.box-body -->
+<div class="box-footer clearfix">
+    {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+    <a href="{!! route('$ROUTES_AS_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.index') !!}" class="btn btn-default">Cancel</a>
+</div>
