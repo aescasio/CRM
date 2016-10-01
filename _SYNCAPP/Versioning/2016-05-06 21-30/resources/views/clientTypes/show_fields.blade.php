@@ -1,0 +1,25 @@
+
+<!-- Name Field -->
+<div class="form-group">
+    {!! Form::label('name', 'Name:') !!}
+    <p>{!! $clientType->name !!}</p>
+</div>
+
+<!-- Description Field -->
+<div class="form-group">
+    {!! Form::label('description', 'Description:') !!}
+    <p>{!! $clientType->description !!}</p>
+</div>
+
+<!-- Created At Field -->
+<div class="form-group">
+    {!! Form::label('created_at', 'Created At:') !!}
+    <p>{!! $clientType->created_at !!}</p>
+</div>
+
+<!-- Updated At Field -->
+<div class="form-group">
+    {!! Form::label('updated_at', 'Updated At:') !!}
+    <p>{!! $clientType->updated_at !!}</p>
+</div>
+

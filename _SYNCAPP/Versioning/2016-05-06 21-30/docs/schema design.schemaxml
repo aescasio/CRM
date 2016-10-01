@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="utf8" collation="utf8_unicode_ci">enchan_crm</database>
+</source>
+<canvas zoom="100">
+<tables>
+<table name="enchan_accounts" view="colnames">
+<left>0</left>
+<top>0</top>
+<width>226</width>
+<height>429</height>
+<sql_create_table>CREATE TABLE `enchan_accounts` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `website` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `office_phone` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `office_fax` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `billing_address` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `billing_street` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `billing_city` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `billing_state` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `billing_postal` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `billing_country` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `description` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `employee_id` int(11) NOT NULL,
+  `same_as_billing` int(11) NOT NULL,
+  `annual_revenue` double(8,2) NOT NULL,
+  `member_of` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `campaign_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `assigned_to` int(10) unsigned NOT NULL,
+  `client_id` int(10) unsigned NOT NULL,
+  `industry_id` int(10) unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `accounts_name_unique` (`name`),
+  KEY `accounts_assigned_to_foreign` (`assigned_to`),
+  KEY `accounts_client_id_foreign` (`client_id`),
+  KEY `accounts_industry_id_foreign` (`industry_id`),
+  CONSTRAINT `accounts_assigned_to_foreign` FOREIGN KEY (`assigned_to`) REFERENCES `enchan_users` (`id`),
+  CONSTRAINT `accounts_client_id_foreign` FOREIGN KEY (`client_id`) REFERENCES `enchan_client_types` (`id`),
+  CONSTRAINT `accounts_industry_id_foreign` FOREIGN KEY (`industry_id`) REFERENCES `enchan_industry_type` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="enchan_client_types" view="colnames">
+<left>292</left>
+<top>390</top>
+<width>267</width>
+<height>175</height>
+<sql_create_table>CREATE TABLE `enchan_client_types` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `description` text COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `client_types_name_unique` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="enchan_industry_type" view="colnames">
+<left>291</left>
+<top>572</top>
+<width>270</width>
+<height>208</height>
+<sql_create_table>CREATE TABLE `enchan_industry_type` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `description` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="enchan_lead_sources" view="colnames">
+<left>596</left>
+<top>489</top>
+<width>288</width>
+<height>158</height>
+<sql_create_table>CREATE TABLE `enchan_lead_sources` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `description` text COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `lead_sources_name_unique` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="enchan_migrations" view="colnames">
+<left>594</left>
+<top>247</top>
+<width>296</width>
+<height>222</height>
+<sql_create_table>CREATE TABLE `enchan_migrations` (
+  `migration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="enchan_password_resets" view="colnames">
+<left>591</left>
+<top>11</top>
+<width>298</width>
+<height>220</height>
+<sql_create_table>CREATE TABLE `enchan_password_resets` (
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL,
+  KEY `password_resets_email_index` (`email`),
+  KEY `password_resets_token_index` (`token`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="enchan_users" view="colnames">
+<left>292</left>
+<top>96</top>
+<width>264</width>
+<height>277</height>
+<sql_create_table>CREATE TABLE `enchan_users` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `fname` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `mname` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `lname` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `department_id` smallint(6) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="enchan_departments" view="colnames">
+<left>952</left>
+<top>50</top>
+<width>110</width>
+<height>175</height>
+<sql_create_table>CREATE TABLE `enchan_departments` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `description` text COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="enchan_i_m_types" view="colnames">
+<left>960</left>
+<top>276</top>
+<width>110</width>
+<height>175</height>
+<sql_create_table>CREATE TABLE `enchan_i_m_types` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `description` text COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>
